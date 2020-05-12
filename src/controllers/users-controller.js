@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Users = mongoose.model('Users');
+const repository = require('../repositories/users-repository');
+const { validationResult } = require('express-validator');
+
 
 // list
 exports.listUsers = async (req, res) => {
@@ -39,7 +42,7 @@ exports.updateUsers = async (req, res) => {
       return res.status(400).send({ message: errors })
     }
 
-    await repository.updateUserFormik(req.params.id, req.body);
+    await repository.updateUsers(req.params.id, req.body);
     res.status(200).send({
       message: 'Usuário atualizado com sucesso!'
     });
@@ -50,7 +53,7 @@ exports.updateUsers = async (req, res) => {
 
 exports.deleteUsers = async (req, res) => {
   try {
-    await repository.deleteUserFormik(req.params.id);
+    await repository.deleteUsers(req.params.id);
     res.status(200).send({
       message: 'Usuário removido com sucesso!'
     });

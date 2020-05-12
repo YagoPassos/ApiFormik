@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
-const usersRep = mongoose.model('usersRep');
+const Users = mongoose.model('Users');
 //list
-exports.listusersRep= async () => {
-      const res = await usersRep.find({}, 'name username ');
+exports.listUsers= async () => {
+      const res = await Users.find({}, 'name username ');
       return res;
   };
   
   // create
-  exports.createusersRep= async data => {
-      const user= new usersRep(data);  
+  exports.createUsers= async data => {
+      const user= new Users(data);  
       await user.save();
   };
 
   // update
-  exports.updateusersRep = async (id, data) => {
-    await usersRep.findByIdAndUpdate(id, {
+  exports.updateUsers = async (id, data) => {
+    await Users.findByIdAndUpdate(id, {
       $set: data
     });
   };
 
   //delete
-  exports.deleteusersRep = async id => {
-    await usersRep.findByIdAndDelete(id);
+  exports.deleteUsers = async id => {
+    await Users.findByIdAndDelete(id);
   };
